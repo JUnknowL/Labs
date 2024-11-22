@@ -1,42 +1,20 @@
+#include "HeapInt.h"
 #include <iostream>
-#include <span>
-#include <cassert>
 
-int main()
+void swap(HeapInt& a, HeapInt& b)
 {
-    std::array<int,5> first{1,2,3,4,5};
-    std::array<int,5> second{1,2,3,4,5};
-    productBreak(first,second);
-}
-void productBreak(std::span<int> inputOutput, std::span<int> coefficients)
-{
-    assert(inputOutput.size() == coefficients.size());
-    size_t i = 0;
-    while (true)
-    {
-        inputOutput[i] *= coefficients[i];
-        i++;
-        if (i==inputOutput.size()) break;
-    }
-    
-}
-void productFor(std::span<int> inputOutput, std::span<int> coefficients)
-{
-    assert(inputOutput.size() == coefficients.size());
-     
-    for (size_t i = 0; i==inputOutput.size();i++)
-    {
-        inputOutput[i] *= coefficients[i];
-    }
+    HeapInt temp = HeapInt(std::move(a));
+    a = std::move(b);
+    b = std::move(temp);
 }
 
-void productWhile(std::span<int> inputOutput, std::span<int> coefficients)
+void constructors()
 {
-    assert(inputOutput.size() == coefficients.size());
-    size_t i = 0;
-    while (i==inputOutput.size())
-    {
-        inputOutput[i] *= coefficients[i];
-        i++;
-    }
+    HeapInt a{5}; // 8
+    HeapInt b{a}; // 9
+    HeapInt c{std::move(a)}; // 10
+    HeapInt d = b; // 11
+    HeapInt e = std::move(b); // 12
+    d = std::move(c); // 13
+    d = e; // 14
 }

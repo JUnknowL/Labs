@@ -2,12 +2,6 @@
 #include <span>
 #include <cassert>
 
-int main()
-{
-    std::array<int,5> first{1,2,3,4,5};
-    std::array<int,5> second{1,2,3,4,5};
-    productBreak(first,second);
-}
 void productBreak(std::span<int> inputOutput, std::span<int> coefficients)
 {
     assert(inputOutput.size() == coefficients.size());
@@ -38,5 +32,16 @@ void productWhile(std::span<int> inputOutput, std::span<int> coefficients)
     {
         inputOutput[i] *= coefficients[i];
         i++;
+    }
+}
+
+int main()
+{
+    std::array<int,5> first{1,2,3,4,5};
+    std::array<int,5> second{1,2,3,4,5};
+    productBreak(first,second);
+    for (auto item : first)
+    {
+        std::cout<<item<<std::endl;
     }
 }
